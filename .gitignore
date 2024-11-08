@@ -1,23 +1,40 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Python / CLI
+cli/**/__pycache__/
+cli/**/*.py[cod]
+cli/**/*.so
+cli/src/tools/__pycache__/
+cli/src/ui/__pycache__/
+cli/*.egg-info/
+cli/dist/
+cli/build/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# System Files
 .DS_Store
-node_modules
-/dist
-
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+Thumbs.db
 
 # Editor directories and files
-.idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment
+.env
+.env.local
+.env.*.local
