@@ -1,10 +1,8 @@
-# Function pour la pause
 function Pause {
     Write-Host 'Press Enter to exit...' -ForegroundColor Yellow
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
 }
 
-# Vérification des droits administrateur
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
     Write-Host 'Please run this script as Administrator' -ForegroundColor Red
     Pause

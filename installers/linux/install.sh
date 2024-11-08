@@ -6,13 +6,11 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-# Function pour la pause
 pause() {
     echo -e "\n${YELLOW}Press Enter to exit...${NC}"
     read -r
 }
 
-# Vérifie les droits sudo
 if [ "$EUID" -ne 0 ]; then
     echo -e "${RED}Please run this script with sudo${NC}"
     pause
@@ -60,7 +58,6 @@ check_python() {
 echo -e "${CYAN}DevToolInstaller - Initial Setup${NC}"
 echo -e "${CYAN}================================${NC}"
 
-# Variables pour le statut
 SETUP_SUCCESS=true
 
 detect_distro

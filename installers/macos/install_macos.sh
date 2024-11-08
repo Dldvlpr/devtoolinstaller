@@ -7,13 +7,11 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-# Function pour la pause
 pause() {
     echo -e "\n${YELLOW}Press Enter to exit...${NC}"
     read -r
 }
 
-# Variables pour le statut
 SETUP_SUCCESS=true
 
 check_homebrew() {
