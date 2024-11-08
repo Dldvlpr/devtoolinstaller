@@ -1,10 +1,20 @@
 #!/bin/bash
 
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
+
+# Function pour la pause
+pause() {
+    echo -e "\n${YELLOW}Press Enter to exit...${NC}"
+    read -r
+}
+
+# Variables pour le statut
+SETUP_SUCCESS=true
 
 check_homebrew() {
     if command -v brew &>/dev/null; then
@@ -51,21 +61,30 @@ install_python() {
 echo -e "${CYAN}DevToolInstaller - Initial Setup${NC}"
 echo -e "${CYAN}================================${NC}"
 
-# Check and install Homebrew
 if ! check_homebrew; then
     install_homebrew
-fi
-
-if ! check_python; then
-    install_python
-
-    if check_python; then
-        echo -e "${GREEN}Python installation successful${NC}"
-    else
-        echo -e "${RED}Python installation failed${NC}"
-        exit 1
+    if ! check_homebrew; then
+        echo -e "${RED}Homebrew installation failed${NC}"
+        SETUP_SUCCESS=false
     fi
 fi
 
-echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "${GREEN}You can now proceed with DevToolInstaller${NC}"
+if [ "$SETUP_SUCCESS" = true ] && ! check_python; then
+    install_python
+    if ! check_python; then
+        echo -e "${RED}Python installation failed${NC}"
+        SETUP_SUCCESS=false
+    fi
+fi
+
+if [ "$SETUP_SUCCESS" = true ]; then
+    echo -e "\n${GREEN}[SUCCESS] Setup completed successfully!${NC}"
+    echo -e "${GREEN}[SUCCESS] Homebrew is ready${NC}"
+    echo -e "${GREEN}[SUCCESS] Python is ready${NC}"
+    echo -e "\n${CYAN}You can now use DevToolInstaller!${NC}"
+else
+    echo -e "\n${RED}[ERROR] Setup encountered problems${NC}"
+    echo -e "${RED}Please check the errors above and try again${NC}"
+fi
+
+pause

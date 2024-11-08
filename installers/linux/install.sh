@@ -6,8 +6,16 @@ YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
+# Function pour la pause
+pause() {
+    echo -e "\n${YELLOW}Press Enter to exit...${NC}"
+    read -r
+}
+
+# Vérifie les droits sudo
 if [ "$EUID" -ne 0 ]; then
     echo -e "${RED}Please run this script with sudo${NC}"
+    pause
     exit 1
 fi
 
@@ -40,7 +48,6 @@ check_python() {
         PYTHON_VERSION=$(python3 --version)
         echo -e "${GREEN}$PYTHON_VERSION is installed${NC}"
 
-        # Update pip
         echo -e "${CYAN}Updating pip...${NC}"
         python3 -m pip install --upgrade pip
         return 0
@@ -52,6 +59,9 @@ check_python() {
 
 echo -e "${CYAN}DevToolInstaller - Initial Setup${NC}"
 echo -e "${CYAN}================================${NC}"
+
+# Variables pour le statut
+SETUP_SUCCESS=true
 
 detect_distro
 echo -e "${CYAN}Detected OS: $OS${NC}"
@@ -66,17 +76,23 @@ if ! check_python; then
             ;;
         *)
             echo -e "${RED}Unsupported distribution: $OS${NC}"
-            exit 1
+            SETUP_SUCCESS=false
             ;;
     esac
 
-    if check_python; then
-        echo -e "${GREEN}Python installation successful${NC}"
-    else
+    if ! check_python; then
         echo -e "${RED}Python installation failed${NC}"
-        exit 1
+        SETUP_SUCCESS=false
     fi
 fi
 
-echo -e "\n${GREEN}Setup completed successfully!${NC}"
-echo -e "${GREEN}You can now proceed with DevToolInstaller${NC}"
+if [ "$SETUP_SUCCESS" = true ]; then
+    echo -e "\n${GREEN}[SUCCESS] Setup completed successfully!${NC}"
+    echo -e "${GREEN}[SUCCESS] Python is ready${NC}"
+    echo -e "\n${CYAN}You can now use DevToolInstaller!${NC}"
+else
+    echo -e "\n${RED}[ERROR] Setup encountered problems${NC}"
+    echo -e "${RED}Please check the errors above and try again${NC}"
+fi
+
+pause
