@@ -1,3 +1,4 @@
+```vue
 <template>
   <Index />
   <TermsModal />
@@ -32,6 +33,24 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #212529;
+}
+
+body::before {
+  content: "Work In Progress";
+  position: fixed;
+  width: 300px;
+  height: 40px;
+  background: #ffc107;
+  color: #000;
+  font-weight: bold;
+  line-height: 40px;
+  text-align: center;
+  transform: rotate(45deg);
+  top: 45px;
+  right: -70px;
+  z-index: 1001;
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {

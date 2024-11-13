@@ -20,40 +20,40 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body d-flex justify-content-center">
             <div class="steps">
-              <div class="step d-flex mb-4">
+              <div class="step d-flex align-items-start mb-4">
                 <div class="step-number">1</div>
-                <div class="ms-3">
-                  <h5 class="text-white">Choose Your OS</h5>
-                  <p class="text-light-emphasis">
+                <div class="step-content">
+                  <h5 class="text-white mb-1">Choose Your OS</h5>
+                  <p class="text-light-emphasis mb-0">
                     Select your operating system from the dropdown
                   </p>
                 </div>
               </div>
-              <div class="step d-flex mb-4">
+              <div class="step d-flex align-items-start mb-4">
                 <div class="step-number">2</div>
-                <div class="ms-3">
-                  <h5 class="text-white">Run the Command</h5>
-                  <p class="text-light-emphasis">
+                <div class="step-content">
+                  <h5 class="text-white mb-1">Run the Command</h5>
+                  <p class="text-light-emphasis mb-0">
                     Copy and paste the installation command in your terminal
                   </p>
                 </div>
               </div>
-              <div class="step d-flex mb-4">
+              <div class="step d-flex align-items-start mb-4">
                 <div class="step-number">3</div>
-                <div class="ms-3">
-                  <h5 class="text-white">Select Tools</h5>
-                  <p class="text-light-emphasis">
+                <div class="step-content">
+                  <h5 class="text-white mb-1">Select Tools</h5>
+                  <p class="text-light-emphasis mb-0">
                     Choose the development tools you want to install
                   </p>
                 </div>
               </div>
-              <div class="step d-flex">
+              <div class="step d-flex align-items-start">
                 <div class="step-number">4</div>
-                <div class="ms-3">
-                  <h5 class="text-white">Start Coding</h5>
-                  <p class="text-light-emphasis">
+                <div class="step-content">
+                  <h5 class="text-white mb-1">Start Coding</h5>
+                  <p class="text-light-emphasis mb-0">
                     Your development environment is ready to use!
                   </p>
                 </div>
@@ -79,7 +79,7 @@
         :key="section.id"
         href="#"
         :class="['nav-dot', { active: currentSection === index }]"
-        @click.prevent="smoothScroll(section.id)"
+        @click.prevent="scrollToSection(section.id)"
       ></a>
     </div>
 
@@ -103,13 +103,14 @@
           </div>
         </div>
       </div>
-      <div class="scroll-arrow bottom" @click="smoothScroll('get-started')">
+      <div class="scroll-arrow bottom" @click="scrollToSection('get-started')">
         <i class="bi bi-chevron-down bounce"></i>
       </div>
     </section>
 
+    <!-- Get Started Section -->
     <section id="get-started" class="section-height d-flex align-items-center">
-      <div class="scroll-arrow top" @click="smoothScroll('hero')">
+      <div class="scroll-arrow top" @click="scrollToSection('hero')">
         <i class="bi bi-chevron-up fade-in"></i>
       </div>
       <div class="container">
@@ -146,20 +147,20 @@
           </div>
         </div>
       </div>
-      <div class="scroll-arrow bottom" @click="smoothScroll('features')">
+      <div class="scroll-arrow bottom" @click="scrollToSection('features')">
         <i class="bi bi-chevron-down bounce"></i>
       </div>
     </section>
 
     <section id="features" class="section-height d-flex align-items-center">
-      <div class="scroll-arrow top" @click="smoothScroll('get-started')">
+      <div class="scroll-arrow top" @click="scrollToSection('get-started')">
         <i class="bi bi-chevron-up fade-in"></i>
       </div>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-8">
             <h2 class="text-center mb-4 text-white fade-in">
-              Available Features
+              Available Features in future
             </h2>
             <div class="row g-4">
               <div
@@ -185,19 +186,17 @@
           </div>
         </div>
       </div>
-      <div class="scroll-arrow bottom" @click="smoothScroll('footer')">
+      <div class="scroll-arrow bottom" @click="scrollToSection('footer')">
         <i class="bi bi-chevron-down bounce"></i>
       </div>
     </section>
 
-    <!-- Remplacer la section footer existante par celle-ci -->
     <section id="footer" class="section-height d-flex align-items-center">
-      <div class="scroll-arrow top" @click="smoothScroll('features')">
+      <div class="scroll-arrow top" @click="scrollToSection('features')">
         <i class="bi bi-chevron-up fade-in"></i>
       </div>
       <div class="container">
         <div class="row g-4 justify-content-center">
-          <!-- Logo et copyright -->
           <div class="col-md-4 text-center text-md-start">
             <img
               :src="logoUrl"
@@ -211,13 +210,12 @@
             </p>
           </div>
 
-          <!-- Quick Links -->
           <div class="col-md-4">
             <h6 class="text-white mb-3">Quick Links</h6>
             <ul class="list-unstyled">
               <li>
                 <a
-                  @click="smoothScroll('get-started')"
+                  @click="scrollToSection('get-started')"
                   href="#"
                   class="footer-link"
                 >
@@ -226,20 +224,11 @@
               </li>
               <li>
                 <a
-                  @click="smoothScroll('features')"
+                  @click="scrollToSection('features')"
                   href="#"
                   class="footer-link"
                 >
                   Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/votre-repo"
-                  target="_blank"
-                  class="footer-link"
-                >
-                  GitHub
                 </a>
               </li>
             </ul>
@@ -290,10 +279,10 @@
           </div>
           <div class="col-md-6 text-center text-md-end">
             <div class="social-links">
-              <a href="#" class="social-link">
-                <i class="bi bi-github"></i>
-              </a>
-              <a href="#" class="social-link ms-3">
+              <a
+                href="https://www.linkedin.com/in/ludovic-dormoy-b67471130"
+                class="social-link ms-3"
+              >
                 <i class="bi bi-linkedin"></i>
               </a>
             </div>
@@ -349,34 +338,16 @@ export default {
   },
   computed: {
     installCommand() {
-      const baseUrl =
-        "https://raw.githubusercontent.com/votre-username/devtoolinstaller/main/installers";
-
       const commands = {
         windows: `
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-        $script = Invoke-WebRequest -Uri "${baseUrl}/windows/install.ps1" -UseBasicParsing;
-        $checksum = Invoke-WebRequest -Uri "${baseUrl}/checksums.txt" -UseBasicParsing |
-          Select-String -Pattern "windows/install.ps1" |
-          Select-Object -ExpandProperty Line |
-          ForEach-Object { ($_ -split "\\s+")[0] };
-
-        if ((Get-FileHash -InputStream ([System.IO.MemoryStream]::new([System.Text.Encoding]::UTF8.GetBytes($script.Content))) -Algorithm SHA256).Hash -eq $checksum) {
-          Invoke-Expression $script.Content
-        } else {
-          Write-Error "Script verification failed. Security check did not pass."
-        }
-      `,
-        unix: `curl -fsSL ${baseUrl}/checksums.txt | grep "$1" | sha256sum -c - && curl -fsSL ${baseUrl}/$1 | bash`,
+        Comming Soon !
+        `,
+        unix: `
+        Comming Soon !
+        `,
       };
 
-      return this.selectedOS === "windows"
-        ? commands.windows
-        : `${commands.unix} "${
-            this.selectedOS === "macos"
-              ? "macos/install_macos.sh"
-              : "linux/install.sh"
-          }"`;
+      return this.selectedOS === "windows" ? commands.windows : commands.unix;
     },
   },
   mounted() {
@@ -416,31 +387,10 @@ export default {
         console.error("Failed to copy command:", err);
       }
     },
-    smoothScroll(targetId) {
+    scrollToSection(targetId) {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        const targetPosition = targetElement.offsetTop;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        const duration = 1000;
-        let start = null;
-
-        const ease = (t, b, c, d) => {
-          t /= d / 2;
-          if (t < 1) return (c / 2) * t * t + b;
-          t--;
-          return (-c / 2) * (t * (t - 2) - 1) + b;
-        };
-
-        const animation = (currentTime) => {
-          if (start === null) start = currentTime;
-          const timeElapsed = currentTime - start;
-          const run = ease(timeElapsed, startPosition, distance, duration);
-          window.scrollTo(0, run);
-          if (timeElapsed < duration) requestAnimationFrame(animation);
-        };
-
-        requestAnimationFrame(animation);
+        targetElement.scrollIntoView({ behavior: "smooth" });
       }
     },
     handleScroll() {
@@ -556,16 +506,55 @@ export default {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+.steps {
+  max-width: 500px;
+  width: 100%;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+}
+
 .step-number {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #198754;
   color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h5 {
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.step-content p {
+  font-size: 0.95rem;
+  color: #adb5bd;
+  text-align: left;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+}
+
+.step:not(:last-child) {
+  border-bottom: 1px solid #343a40;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .fade-in {
@@ -610,6 +599,25 @@ export default {
 
   .scroll-arrow {
     font-size: 1.5rem;
+  }
+
+  .steps {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    margin-right: 15px;
+  }
+
+  .step-content h5 {
+    font-size: 1rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
   }
 }
 
