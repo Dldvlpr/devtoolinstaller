@@ -1,6 +1,3 @@
-#!/bin/bash
-
-# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -40,10 +37,7 @@ install_homebrew() {
 check_python() {
     if command -v python3 &>/dev/null; then
         PYTHON_VERSION=$(python3 --version)
-        echo -e "${GREEN}$PYTHON_VERSION is installed${NC}"
-
-        echo -e "${CYAN}Updating pip...${NC}"
-        python3 -m pip install --upgrade pip
+        echo -e "${GREEN}Python $PYTHON_VERSION is installed${NC}"
         return 0
     else
         echo -e "${YELLOW}Python 3 is not installed${NC}"
@@ -52,8 +46,14 @@ check_python() {
 }
 
 install_python() {
-    echo -e "${CYAN}Installing Python 3...${NC}"
-    brew install python@3.11
+    echo -e "${CYAN}Installing/Updating Python...${NC}"
+    brew install python
+
+-    brew unlink python
+    brew link python
+
+    brew install pipx
+    brew upgrade pipx
 }
 
 echo -e "${CYAN}DevToolInstaller - Initial Setup${NC}"
@@ -67,7 +67,7 @@ if ! check_homebrew; then
     fi
 fi
 
-if [ "$SETUP_SUCCESS" = true ] && ! check_python; then
+if [ "$SETUP_SUCCESS" = true ]; then
     install_python
     if ! check_python; then
         echo -e "${RED}Python installation failed${NC}"
