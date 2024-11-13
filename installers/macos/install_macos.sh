@@ -1,3 +1,5 @@
+#!/bin/bash
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -47,13 +49,7 @@ check_python() {
 
 install_python() {
     echo -e "${CYAN}Installing/Updating Python...${NC}"
-    brew install python
-
--    brew unlink python
-    brew link python
-
-    brew install pipx
-    brew upgrade pipx
+    brew upgrade python || brew install python
 }
 
 echo -e "${CYAN}DevToolInstaller - Initial Setup${NC}"
