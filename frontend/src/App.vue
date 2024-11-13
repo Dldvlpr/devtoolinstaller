@@ -1,4 +1,3 @@
-```vue
 <template>
   <Index />
   <TermsModal />

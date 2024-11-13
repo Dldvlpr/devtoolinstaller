@@ -108,13 +108,32 @@
       </div>
     </section>
 
-    <!-- Get Started Section -->
     <section id="get-started" class="section-height d-flex align-items-center">
       <div class="scroll-arrow top" @click="scrollToSection('hero')">
         <i class="bi bi-chevron-up fade-in"></i>
       </div>
       <div class="container">
         <div class="row justify-content-center">
+          <div class="info-box p-3 rounded mb-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-info-circle text-info me-2"></i>
+              <h5 class="text-light mb-0">General Information</h5>
+            </div>
+            <p class="text-muted mb-0">
+              Once the command is copied and pasted into your terminal, a shell
+              will open and execute the script automatically. No further actions
+              are required.
+            </p>
+          </div>
+          <div class="info-box p-3 rounded mb-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-terminal text-info me-2"></i>
+              <h5 class="text-light mb-0">Installation Process</h5>
+            </div>
+            <p class="text-muted mb-0">
+              {{ osExplanation }}
+            </p>
+          </div>
           <div class="col-md-8">
             <div class="card bg-dark border-secondary fade-in">
               <div class="card-body">
@@ -348,6 +367,18 @@ export default {
       };
 
       return this.selectedOS === "windows" ? commands.windows : commands.unix;
+    },
+    osExplanation() {
+      if (this.selectedOS === "windows") {
+        return `On Windows, this command will automatically verify if the latest
+                versions of Python and PowerShell are installed on your system. If any
+                required version is missing or outdated, the tool will handle the installation
+                or update process to ensure your environment meets the necessary requirements.`;
+      } else {
+        return `On Linux/MacOS, this command will automatically check if Python 3 is installed
+                and up to date. If a required version is missing or outdated, the tool will
+                manage the installation or update to ensure compatibility with the application.`;
+      }
     },
   },
   mounted() {
@@ -687,5 +718,31 @@ code {
 
 .social-link:hover {
   color: #fff;
+}
+
+.info-box {
+  background-color: #2c3034;
+  border: 1px solid #444;
+  transition: all 0.3s ease;
+}
+
+.info-box:hover {
+  border-color: #0d6efd;
+}
+
+.info-box h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.info-box p {
+  font-size: 0.95rem;
+  color: #adb5bd;
+}
+
+.bi-info-circle,
+.bi-terminal {
+  font-size: 1.2rem;
+  color: #0d6efd;
 }
 </style>
